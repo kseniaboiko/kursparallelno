@@ -3,34 +3,8 @@ import java.util.*;
 import java.util.stream.IntStream;
 public class Main {
 	public static void main(String args[]) throws Exception {
-			
-		final double a = 5;
-		final double A = 2;
-		final double h = 0.1;
-		final double tau = 0.005;
-		final int amountTau = 200;
-		final int amountH = 10;
-		double valueH = 0;
-		double valueTau = 0;	
-		
-		double w[][] = new double[amountTau][amountH];
-		IntStream.range(0,w[0].length).parallel().forEach(i->w[0][i]=calculateExact(i*h,0));
-		
-		
-		IntStream.range(0,w.length).parallel().forEach(i->{
-		w[i][0]=calculateExact(0,i*tau);
-		w[i][w[0].length-1]= calculateExact(1,i*tau);
-		});
-		
-		
-		for (int i = 0; i < amountTau; ++i) {
-			// System.out.println("{");
-			for (int j = 0; j < amountH; ++j) {
-				System.out.print(w[i][j] + "," + "\t");
-			}
-			System.out.println();
-		}
-		
+			UnDirect undirect = new UnDirect();
+			(undirect).calc();
 		
 		
 		
@@ -40,9 +14,8 @@ public class Main {
 	
 	}
 	
-	static double calculateExact(double valueH, double valueTau) {
-		return 1.0 / (1.0 + 2 * Math.pow(Math.exp(1), Math.sqrt(2) * 0.5 * valueH + 0.5 * (2 * 5 - 1) * valueTau));
-	}
-
+	
+	
+	
 
 }
